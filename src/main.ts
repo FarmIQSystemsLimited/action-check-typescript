@@ -57,11 +57,11 @@ async function run(): Promise<void> {
     const yarnLock = fs.existsSync(path.resolve(workingDir, 'yarn.lock'))
     const packageLock = fs.existsSync(path.resolve(workingDir, 'package-lock.json'))
 
-    let installScript = `npm install --production=false`
+    let installScript = `npm install --production=false --legacy-peer-deps`
     if (yarnLock) {
       installScript = `yarn --frozen-lockfile`
     } else if (packageLock) {
-      installScript = `npm ci`
+      installScript = `npm ci --legacy-peer-deps`
     }
 
     const rootDir = `.`
